@@ -1,0 +1,20 @@
+# Palavra do Dia - Configuração para o Render
+
+Este é um arquivo de configuração para o Render que especifica como o serviço deve ser construído e executado.
+
+services:
+  - type: web
+    name: palavra-do-dia
+    env: node
+    buildCommand: npm install
+    startCommand: node src/backend/server.js
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRE
+        value: 30d
+      - key: NODE_ENV
+        value: production
+    healthCheckPath: /
